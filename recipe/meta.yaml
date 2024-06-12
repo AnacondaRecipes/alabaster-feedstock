@@ -1,43 +1,46 @@
-{% set version = "0.7.12" %}
+{% set name = "alabaster" %}
+{% set version = "0.7.16" %}
 
 package:
-  name: alabaster
+  name: {{ name }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/a/alabaster/alabaster-{{ version }}.tar.gz
-  sha256: a661d72d58e6ea8a57f7a86e37d86716863ee5e92788398526d58b26a4e4dc02
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 75a8b99c28a5dad50dd7f8ccdd447a121ddb3892da9e53d1ca5cca3106d58d65
 
 build:
-  noarch: python
   number: 0
-  script: python -m pip install --no-deps --ignore-installed .
+  skip: True  # [py<39]
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation --ignore-installed --no-cache-dir -vv
 
 requirements:
   host:
     - python
     - pip
+    - flit-core >=3.7
   run:
     - python
 
 test:
   imports:
     - alabaster
+  requires:
+    - pip
   commands:
     - python -c "import alabaster; print(alabaster.get_path())"
+    - pip check
 
 about:
-  home: http://www.sphinx-doc.org/en/stable/index.html
-  license: BSD 3-Clause
-  license_file: LICENSE
-  summary: 'Configurable, Python 2+3 compatible Sphinx theme.'
+  home: https://alabaster.readthedocs.io/
+  license: BSD-3-Clause
+  license_family: BSD
+  license_file: LICENSE.rst
+  summary: Lightweight, configurable Sphinx theme
   description: |
-    Alabaster is a visually clean, responsive, and configurable Sphinx
-    theme. It is sidebar-enabled and easy to install/use as a Python
-    package. As of Sphinx 1.3, Alabaster is selected as the default
-    theme for Sphinx.
-  doc_url: https://anaconda.org/anaconda/alabaster
-  dev_url: https://github.com/bitprophet/alabaster
+    Alabaster is a visually (c)lean, responsive, configurable theme for the Sphinx documentation system.
+  doc_url: https://alabaster.readthedocs.io/
+  dev_url: https://github.com/sphinx-doc/alabaster
 
 extra:
   recipe-maintainers:
