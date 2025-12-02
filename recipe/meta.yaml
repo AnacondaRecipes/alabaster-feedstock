@@ -30,16 +30,17 @@ test:
   commands:
     - python -c "import alabaster; print(alabaster.get_path())"
     - pip check
+    - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
 
 about:
-  home: https://alabaster.readthedocs.io/
+  home: https://alabaster.readthedocs.io
   license: BSD-3-Clause
   license_family: BSD
   license_file: LICENSE.rst
   summary: Lightweight, configurable Sphinx theme
   description: |
     Alabaster is a visually (c)lean, responsive, configurable theme for the Sphinx documentation system.
-  doc_url: https://alabaster.readthedocs.io/
+  doc_url: https://alabaster.readthedocs.io
   dev_url: https://github.com/sphinx-doc/alabaster
 
 extra:
