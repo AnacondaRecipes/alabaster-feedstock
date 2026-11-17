@@ -10,7 +10,7 @@ source:
   sha256: 75a8b99c28a5dad50dd7f8ccdd447a121ddb3892da9e53d1ca5cca3106d58d65
 
 build:
-  number: 0
+  number: 1  # rebuild for win-arm64
   skip: True  # [py<39]
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation --ignore-installed --no-cache-dir -vv
 
